@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main(){
+    int wynik=0;
+    for (int i=1001; i<=9999; i++){
+        int k=i;
+        int suma=0;
+
+        while (k!=0){
+            suma+=k%10;
+            k/=10;
+        }
+        if(suma==5){
+            wynik++;
+            //printf("%i\n", i);
+        }
+    }
+    printf("%i", wynik);
+    return 0;
+}
