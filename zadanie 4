@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+
+std::vector <int> tyleczynnikow[14];
+//najmniejsza liczba z najmniejsza liczba czynnikow pierwszych
+//jest w postaci 2*2*2*...*2=2^n
+//ma ona n czynnikow
+//poniewaz log2 (9999) = 13,28... to maksymalna liczba czynnikow to 13
+//wiemy rowniez ze istnieje liczba o 13 czynnikach i jest to 2^13
+
+
+int main(){
+    int maks=0;
+    for (int i=1001; i<=9999; i++){
+
+        int wynik=0;
+        int k=i;
+        int z=2;
+
+        while (k!=1){
+
+            if (k%z==0){
+                k/=z;
+                wynik++;
+            }
+
+            else z++;
+        }
+
+        if (wynik>maks) maks=wynik;
+        tyleczynnikow[wynik].push_back(i);
+    }
+
+    printf("jestem tu");
+    for (int j=0; j<tyleczynnikow[13].size(); j++){
+
+        printf("%i", tyleczynnikow[13][j]);
+
+    }
+}
