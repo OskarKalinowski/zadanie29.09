@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+//algorytm chlopow ruskich dla potegowania
+long long int mnozenieModulo(long long a, long long b, long long m)
+{
+	
+	if (b==1) return a % m ;
+	if (b==0) return 0;
+
+	if (b%2==0) return (mnozenieModulo (a , b/2 , m) % m * 2) % m ;
+
+	return (mnozenieModulo (a , b/2 , m) % m * 2 + a) % m;
+	
+}
+
+
+long long int resztaZpotegowania( long long int a, long long int b, long long int m){
+	if (b==0){
+		return 1;
+	}
+	if (b%2==0){
+		long long int wynik=resztaZpotegowania(a, b/2, m)%m;
+		//wynik=a^(b/2)
+		return mnozenieModulo(wynik, wynik, m)%m;
+		//a^(b/2)* a^(b/2)=a^b
+	}
+	return mnozenieModulo(resztaZpotegowania(a, b-1, m), a,m) % m;
+	
+}
+int main(){
+
+	srand(time(NULL));
+	//powyzsza linjka przechodzi po uruchomieniu .exe na komputerze ale nie po uruchomieniu w dowolnej sprawdzaczce np. themis, sio2
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+
+	long long int n;
+	cin>>n;
+
+	//MTF, powtarzamy 1000 razy zeby miec pewnosc ze (a^p-1)%p=1
+	//np dla a=5 i p=4 powyzsza rownosc zachodzi mimo ze p nie jest pierwsze
+	for (int i=0; i<1000; i++){
+
+		unsigned int o=rand()%100000000+100;
+		if (o%n==0) continue;
+
+		if (resztaZpotegowania(o,n-1,n)!=1){
+			cout<<"NIE";
+			return 0;
+		}
+	}
+	cout<<"TAK";
+}
