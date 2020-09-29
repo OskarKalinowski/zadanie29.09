@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <vector>
+
+std::vector <int> tyleczynnikow[14];
+
+int main(){
+    int maks=0;
+    for (int i=1001; i<=9999; i++){
+        int wynik=0;
+        int k=i;
+        int z=2;
+        int poprzednia=1;
+        while (k!=1){
+            
+            //sprintf("jebie wam matki\n k = %i", k);
+            if (k%z==0){
+                k=k/z;
+                
+                if (poprzednia!=z){
+                    wynik++;
+                }
+                
+                poprzednia=z;
+            }
+
+            else {
+                poprzednia=z;
+                z++;
+            }
+
+        }
+
+        if (wynik>maks) maks=wynik;
+        tyleczynnikow[wynik].push_back(i);
+    }
+
+    printf("jestem tu");
+    for (int j=0; j<tyleczynnikow[maks].size(); j++){
+
+        printf("%i\n", tyleczynnikow[maks][j]);
+
+    }
+}
